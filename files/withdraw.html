@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw - Investment Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles - Same as dashboard */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--sidebar-width);
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu {
+            margin-top: 2rem;
+        }
+
+        .menu-item {
+            padding: 0.75rem 1rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .menu-item.active {
+            background: var(--secondary-color);
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .withdraw-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .payment-method {
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .payment-method.selected {
+            border-color: var(--secondary-color);
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .payment-method img {
+            height: 30px;
+            margin-right: 1rem;
+        }
+
+        .btn-withdraw {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            width: 100%;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-withdraw:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .recent-withdrawals {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4>Investment Platform</h4>
+            <p class="mb-0">Welcome, User!</p>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="dashboard.html" class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                Dashboard
+            </a>
+            <a href="packages.html" class="menu-item">
+                <i class="fas fa-box"></i>
+                Packages
+            </a>
+            <a href="transactions.html" class="menu-item">
+                <i class="fas fa-exchange-alt"></i>
+                Transactions
+            </a>
+            <a href="#" class="menu-item active">
+                <i class="fas fa-wallet"></i>
+                Withdraw
+            </a>
+            <a href="settings.html" class="menu-item">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2 class="mb-4">Withdraw Funds</h2>
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Available Balance</h4>
+                    <h2>$10,500.00</h2>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h4>Pending Withdrawals</h4>
+                    <h2>$1,000.00</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Withdraw Form -->
+                <div class="withdraw-card">
+                    <h4 class="mb-4">Withdrawal Details</h4>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Amount to Withdraw</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" placeholder="Enter amount">
+                        </div>
+                        <small class="text-muted">Minimum withdrawal: $100</small>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Select Payment Method</label>
+                        
+                        <div class="payment-method selected">
+                            <div class="d-flex align-items-center">
+                                <input type="radio" name="payment" checked>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                                <span>PayPal</span>
+                            </div>
+                        </div>
+
+                        <div class="payment-method">
+                            <div class="d-flex align-items-center">
+                                <input type="radio" name="payment">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Bank Transfer">
+                                <span>Bank Transfer</span>
+                            </div>
+                        </div>
+
+                        <div class="payment-method">
+                            <div class="d-flex align-items-center">
+                                <input type="radio" name="payment">
+                                <i class="fab fa-bitcoin fa-2x me-3 text-warning"></i>
+                                <span>Cryptocurrency</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-withdraw">
+                        <i class="fas fa-money-bill-wave me-2"></i>
+                        Request Withdrawal
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Recent Withdrawals -->
+                <div class="recent-withdrawals">
+                    <h4 class="mb-4">Recent Withdrawals</h4>
+                    
+                    <div class="mb-3 pb-3 border-bottom">
+                        <div class="d-flex justify-content-between">
+                            <span>Dec 20, 2023</span>
+                            <span class="text-danger">-$1,000.00</span>
+                        </div>
+                        <small class="text-muted">Via PayPal • Pending</small>
+                    </div>
+
+                    <div class="mb-3 pb-3 border-bottom">
+                        <div class="d-flex justify-content-between">
+                            <span>Dec 15, 2023</span>
+                            <span class="text-success">-$500.00</span>
+                        </div>
+                        <small class="text-muted">Via Bank Transfer • Completed</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>Dec 10, 2023</span>
+                            <span class="text-success">-$750.00</span>
+                        </div>
+                        <small class="text-muted">Via Cryptocurrency • Completed</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', () => {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                method.classList.add('selected');
+                method.querySelector('input[type="radio"]').checked = true;
+            });
+        });
+    </script>
+</body>
+</html>

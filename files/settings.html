@@ -1,0 +1,315 @@
+# Create settings.html file
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Investment Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--sidebar-width);
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu {
+            margin-top: 2rem;
+        }
+
+        .menu-item {
+            padding: 0.75rem 1rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .menu-item.active {
+            background: var(--secondary-color);
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+        }
+
+        .settings-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .upload-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-btn input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .verification-badge {
+            background: #d4edda;
+            color: #155724;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        .verification-badge i {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4>Investment Platform</h4>
+            <p class="mb-0">Welcome, User!</p>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="dashboard.html" class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                Dashboard
+            </a>
+            <a href="packages.html" class="menu-item">
+                <i class="fas fa-box"></i>
+                Packages
+            </a>
+            <a href="transactions.html" class="menu-item">
+                <i class="fas fa-exchange-alt"></i>
+                Transactions
+            </a>
+            <a href="withdraw.html" class="menu-item">
+                <i class="fas fa-wallet"></i>
+                Withdraw
+            </a>
+            <a href="#" class="menu-item active">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2 class="mb-4">Account Settings</h2>
+
+        <div class="row">
+            <!-- Profile Settings -->
+            <div class="col-md-6">
+                <div class="settings-card">
+                    <h4 class="mb-4">Profile Settings</h4>
+                    
+                    <div class="text-center mb-4">
+                        <img src="https://via.placeholder.com/150" alt="Profile" class="profile-image">
+                        <div>
+                            <button class="btn btn-outline-primary upload-btn">
+                                <i class="fas fa-camera me-2"></i>Change Photo
+                                <input type="file" accept="image/*">
+                            </button>
+                        </div>
+                    </div>
+
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" value="John Doe">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" value="john@example.com" disabled>
+                            <span class="verification-badge">
+                                <i class="fas fa-check-circle"></i>
+                                Verified
+                            </span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" value="+1 234 567 8900">
+                        </div>
+
+                        <button type="submit" class="btn btn-save">
+                            <i class="fas fa-save me-2"></i>Save Changes
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Security Settings -->
+            <div class="col-md-6">
+                <div class="settings-card">
+                    <h4 class="mb-4">Security Settings</h4>
+                    
+                    <form>
+                        <div class="mb-4">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" class="form-control">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">New Password</label>
+                            <input type="password" class="form-control">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label d-block">Two-Factor Authentication</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked>
+                                <label class="form-check-label">Enable 2FA</label>
+                            </div>
+                            <small class="text-muted">Secure your account with two-factor authentication</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-save">
+                            <i class="fas fa-shield-alt me-2"></i>Update Security
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="settings-card">
+                    <h4 class="mb-4">Notification Settings</h4>
+                    
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" checked>
+                            <label class="form-check-label">Email Notifications</label>
+                        </div>
+                        <small class="text-muted">Receive email updates about your account activity</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" checked>
+                            <label class="form-check-label">SMS Notifications</label>
+                        </div>
+                        <small class="text-muted">Receive SMS alerts for important updates</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">Marketing Communications</label>
+                        </div>
+                        <small class="text-muted">Receive updates about new features and promotions</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-bell me-2"></i>Save Preferences
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>"""
+
+# Write the content to settings.html
+with open('settings.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("settings.html file has been created successfully!")
